@@ -1,21 +1,35 @@
 <div class="row">
-  <div class="col-12">
+  <div class="col-xs-12">
     <h1>Wago AllFonts</h1>
     <hr />
   </div>
 </div>
 <div class="row">
-  <div class="form-group">
-    <label for="text">
-      New font:
-    </label>
-    <input type="text" [(ngModel)]="newFont" class="form-control" />
+  <div class="col-xs-6">
+    <div class="form-group">
+        <label for="text">
+          New font name
+        </label><br />
+        <i>(case sensitive, ExpressWay is wrong, Expressway is correct):</i>
+        <input type="text" [(ngModel)]="newFont" class="form-control" />
+      </div>
+      <div class="form-group" *ngIf="newFont">
+        <label for="file">WeakAuras LUA file:</label>
+        <input type="file" class="form-control" (change)="processFile($event)" accept=".lua" />
+      </div>
+      <div class="form-group" *ngIf="fileId">
+        <a class="btn btn-success" *ngIf="downloadUrl; else processing" [href]="downloadUrl">Download</a>
+        <ng-template #processing>Processing..</ng-template>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="file">WeakAuras LUA file:</label>
-    <input type="file" class="form-control" *ngIf="newFont" (change)="processFile($event)" accept=".lua" />
-  </div>
-  <div class="form-group">
-    <a class="btn btn-success" *ngIf="downloadUrl" [href]="downloadUrl">Download</a>
+  <div class="col-xs-6">
+    <div class="alert alert-info">
+      <strong>Where to find WeakAuras LUA file:</strong><br />
+      C:\Program Files (x86)\World of Warcraft\WTF\Account\&lt;account name&gt;\SavedVariables
+    </div>
+    <div class="alert alert-info">
+      <strong>After downloading:</strong><br />
+      Rename the file to WeakAuras.lua and put it in the folder above
+    </div>
   </div>
 </div>

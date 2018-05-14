@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
 import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from 'angularfire2/storage';
-import { map } from 'rxjs/operators/map';
-import { Observable } from 'rxjs/Observable';
-import { Http } from '@angular/http';
 
 @Component({
   selector: 'app-root',
@@ -17,9 +14,10 @@ export class AppComponent {
   private fileId: string;
   private newFont = '';
 
-  constructor(private af: AngularFireStorage, private http: Http) { }
+  constructor(private af: AngularFireStorage) { }
 
   processFile(event) {
+    this.downloadUrl = null;
     const file = event.target.files[0];
     const reader = new FileReader();
     reader.readAsText(file);
